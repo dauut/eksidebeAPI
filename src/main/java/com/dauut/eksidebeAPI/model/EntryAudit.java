@@ -16,7 +16,7 @@ public class EntryAudit {
 
     @Column(name = "entry_date")
     @JoinColumn(name = "entry_date")
-    private String date;
+    private LocalDate date;
 
     @Column(name = "entry_url")
     private String url;
@@ -32,11 +32,11 @@ public class EntryAudit {
         this.entryId = entryId;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

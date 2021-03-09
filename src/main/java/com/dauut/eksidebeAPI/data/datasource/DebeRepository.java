@@ -8,4 +8,5 @@ import java.time.LocalDate;
 
 @Repository
 public interface DebeRepository extends JpaRepository<DebeAudit, LocalDate> {
+    DebeAudit findDebeAuditByListDate(LocalDate date);
 }

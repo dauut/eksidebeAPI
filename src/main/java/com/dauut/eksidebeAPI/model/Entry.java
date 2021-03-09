@@ -2,23 +2,26 @@ package com.dauut.eksidebeAPI.model;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class Entry {
     private int entryId;
     @NotNull
     private String url;
-    private String date;
-    private String author;
+    private LocalDate date;
     @NotNull
     private String header;
 
-    public Entry(int entryId, @NotNull String url, @NotNull String header, String date, String author) {
+    public Entry(){
+
+    }
+
+    public Entry(int entryId, @NotNull String url, @NotNull String header, LocalDate date) {
         this.entryId = entryId;
         this.date = date;
         this.url = url;
         this.header = header;
-        this.author = author;
     }
 
     public int getEntryId() {
@@ -37,20 +40,12 @@ public class Entry {
         this.url = url;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(@NotNull String date) {
+    public void setDate(@NotNull LocalDate date) {
         this.date = date;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
     }
 
     public @NotNull String getHeader() {
@@ -61,4 +56,16 @@ public class Entry {
         this.header = header;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Entry entry = (Entry) o;
+        return entryId == entry.entryId && url.equals(entry.url) && Objects.equals(date, entry.date) && header.equals(entry.header);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(entryId, url, date, header);
+    }
 }

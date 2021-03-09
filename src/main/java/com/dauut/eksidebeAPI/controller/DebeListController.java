@@ -1,40 +1,43 @@
 package com.dauut.eksidebeAPI.controller;
 
 import com.dauut.eksidebeAPI.model.Entry;
-import com.dauut.eksidebeAPI.service.DebeListService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.dauut.eksidebeAPI.model.EntryAudit;
+import com.dauut.eksidebeAPI.service.DebeEntriesService;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.time.format.DateTimeParseException;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("debe")
 public class DebeListController {
 
-    private final DebeListService debeListService;
+    private final DebeEntriesService debeEntriesService;
 
-    public DebeListController(DebeListService debeListService) {
-        this.debeListService = debeListService;
+    public DebeListController(DebeEntriesService debeEntriesService) {
+        this.debeEntriesService = debeEntriesService;
     }
 
     @RequestMapping("{date}")
     public List<Entry> getDebeListOfDate(@PathVariable String date) {
-
-        List<Entry> entries = debeListService.getAllEntriesForThisDay(date);
-
-        return entries.stream().map(entry -> new Entry(entry.getEntryId(),entry.getUrl(),
-                entry.getHeader(), entry.getDate(),entry.getAuthor())).
-                collect(Collectors.toList());
-//        return entries;
+        //ToDo validate string
+        try {
+            LocalDate localDate = LocalDate.parse(date);
+            List<EntryAudit> debeList = debeEntriesService.retDebeEntriesOfDate(localDate);
+            return debeList.stream()
+                    .map(entry -> new Entry(entry.getEntryId(), entry.getUrl(), entry.getHeader(), entry.getDate()))
+                    .collect(Collectors.toList());
+        } catch (DateTimeParseException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
+    @RequestMapping(method = RequestMethod.GET)
+    public Entry getEntryById(@RequestParam(value = "id") Integer id) {
+        return debeEntriesService.retEntryById(id);
+    }
 
 }
