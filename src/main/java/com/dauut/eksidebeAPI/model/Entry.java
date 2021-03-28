@@ -2,10 +2,11 @@ package com.dauut.eksidebeAPI.model;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Entry {
+public class Entry implements Serializable {
     private int entryId;
     @NotNull
     private String url;

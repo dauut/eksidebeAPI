@@ -3,13 +3,14 @@ package com.dauut.eksidebeAPI.model;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
 @Table(name = "debe_entries")
 @EntityListeners(AuditingEntityListener.class)
-public class EntryAudit {
+public class EntryAudit implements Serializable {
     @Id
     @Column(name = "entry_id")
     private int entryId;

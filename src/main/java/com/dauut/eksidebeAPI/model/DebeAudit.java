@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -11,7 +12,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "debe_list")
 @EntityListeners(AuditingEntityListener.class)
-public class DebeAudit {
+public class DebeAudit implements Serializable {
     @Id
     @NotNull
     @Column(name = "list_date")

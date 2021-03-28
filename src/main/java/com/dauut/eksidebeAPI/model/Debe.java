@@ -2,12 +2,13 @@ package com.dauut.eksidebeAPI.model;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
-public class Debe {
+public class Debe implements Serializable {
 
     @NotNull
     private List<Entry> debeEntries;

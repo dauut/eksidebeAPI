@@ -5,6 +5,7 @@ import com.dauut.eksidebeAPI.data.datasource.EntryRepository;
 import com.dauut.eksidebeAPI.model.DebeAudit;
 import com.dauut.eksidebeAPI.model.Entry;
 import com.dauut.eksidebeAPI.model.EntryAudit;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -22,11 +23,14 @@ public class DebeEntriesServiceImp implements DebeEntriesService {
         this.debeRepository = debeRepository;
     }
 
+    @Cacheable(value = "debeList", key = "#date")
     @Override
     public List<EntryAudit> retDebeEntriesOfDate(LocalDate date) {
+        System.out.println("DEBE FETCHED: " + date);
         return entryRepository.findByDate(date);
     }
 
+    @Cacheable(value = "entryId", key = "#id")
     @Override
     public Entry retEntryById(int id) {
         List<EntryAudit> ea = entryRepository.findAllByEntryId(id);
