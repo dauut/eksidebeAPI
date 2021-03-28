@@ -12,6 +12,7 @@ It consumes the data that fetched via [EksiDebeFetcher Service](https://github.c
 - Spring Boot
 - PostgreSQL
 - Java 8+
+- Redis
 
 ## Project Structure
 ```
@@ -30,7 +31,7 @@ It consumes the data that fetched via [EksiDebeFetcher Service](https://github.c
 
 ## Usage
 
-`hostaddress:8080/debe/{date}`
+`hostaddress:8081/debe/{date}`
 
 *Example:*
 
