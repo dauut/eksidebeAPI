@@ -23,7 +23,7 @@ public class DebeListController {
     @RequestMapping("{date}")
     public List<Entry> getDebeListOfDate(@PathVariable String date) {
         //ToDo validate string
-        System.out.println("DEBE REQUESTED");
+//        System.out.println("DEBE REQUESTED");
         try {
             LocalDate localDate = LocalDate.parse(date);
             List<EntryAudit> debeList = debeEntriesService.retDebeEntriesOfDate(localDate);

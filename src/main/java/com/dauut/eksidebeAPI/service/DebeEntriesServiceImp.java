@@ -26,7 +26,7 @@ public class DebeEntriesServiceImp implements DebeEntriesService {
     @Cacheable(value = "debeList", key = "#date")
     @Override
     public List<EntryAudit> retDebeEntriesOfDate(LocalDate date) {
-        System.out.println("DEBE FETCHED: " + date);
+//        System.out.println("DEBE FETCHED: " + date);
         return entryRepository.findByDate(date);
     }
 
